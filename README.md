@@ -1,3 +1,8 @@
+<div align="center">
+
+### ✨ [View Interactive Profile →](https://mohammed-ateeq-nova.github.io/Mohammed-Ateeq-nova/)
+
+</div>
  # 💫 About Me:
 🔭 I'm currently working on AI-driven web apps and full-stack projects<br>🤝 I'm looking to collaborate on open-source projects in React, Next.js, or ML/AI<br>🤲 I'm looking for help with advanced deep learning architectures and system design<br>🌱 I'm currently learning cloud deployment, advanced TensorFlow, and system-level programming<br>💬 Ask me about React, Next.js, Python, TensorFlow, or building full-stack applications<br>⚡ Fun fact I helped in funding the GFG AU Student Chapter hackathon (400+ participants!) through my own freelance projects!
 ## 🌐 Socials:
