@@ -4,6 +4,7 @@ Generate a neofetch-style info card SVG.
 Each line fades/slides in on a stagger.
 """
 import os
+from html import escape
 from pathlib import Path
 
 # ─── CONFIG ──────────────────────────────────────────────────────────────
@@ -32,7 +33,7 @@ GREEN = "#3fb950"
 ORANGE = "#d29922"
 PURPLE = "#a371f7"
 
-FONT_FAMILY = '"SF Mono", "Fira Code", "Monospace"'
+FONT_FAMILY = "SF Mono, Fira Code, Monospace"
 FONT_SIZE = 11
 LINE_HEIGHT = 20
 PADDING = 16
@@ -83,7 +84,7 @@ def make_info_card(output_path: str = "info-card.svg") -> None:
         f'  <circle cx="14" cy="18" r="6" fill="#ff5f57"/>',
         f'  <circle cx="32" cy="18" r="6" fill="#ffbd2e"/>',
         f'  <circle cx="50" cy="18" r="6" fill="#28ca42"/>',
-        f'  <text x="70" y="24" font-family={FONT_FAMILY} font-size="11" fill="{TEXT_MUTED}">',
+        f'  <text x="70" y="24" font-family="{FONT_FAMILY}" font-size="11" fill="{TEXT_MUTED}">',
         f'    {DISPLAY_NAME}@github',
         f'  </text>',
         f'  <style>',
@@ -102,7 +103,7 @@ def make_info_card(output_path: str = "info-card.svg") -> None:
 
         delay = i * STAGGER_MS
         cls = "value bold" if bold else "value"
-        style = f'fill="{color};"'
+        style = f"fill: {color};"
 
         # Label
         if label:
@@ -148,7 +149,7 @@ def make_info_card(output_path: str = "info-card.svg") -> None:
             f'  <circle cx="14" cy="18" r="6" fill="#ff5f57"/>',
             f'  <circle cx="32" cy="18" r="6" fill="#ffbd2e"/>',
             f'  <circle cx="50" cy="18" r="6" fill="#28ca42"/>',
-            f'  <text x="70" y="24" font-family={FONT_FAMILY} font-size="11" fill="{TEXT_MUTED}">',
+            f'  <text x="70" y="24" font-family="{FONT_FAMILY}" font-size="11" fill="{TEXT_MUTED}">',
             f'    {DISPLAY_NAME}@github',
             f'  </text>',
             f'  <style>',
@@ -163,7 +164,7 @@ def make_info_card(output_path: str = "info-card.svg") -> None:
                 y += LINE_HEIGHT // 2
                 continue
             cls = "value bold" if bold else "value"
-            style = f'fill="{color};"'
+            style = f"fill: {color};"
             if label:
                 svg_parts.append(f'  <text x="{PADDING}" y="{y}" class="label">{escape_xml(label)}</text>')
                 label_w = len(label) * 6.5
@@ -176,12 +177,12 @@ def make_info_card(output_path: str = "info-card.svg") -> None:
 
     svg_parts.append('</svg>')
 
-    Path(output_path).write_text("\n".join(svg_parts))
+    Path(output_path).write_text("\n".join(svg_parts), encoding="utf-8")
     print(f"Wrote {output_path}")
 
 
 def escape_xml(text: str) -> str:
-    return text.replace("&", "&").replace("<", "<").replace(">", ">")
+    return escape(text)
 
 
 if __name__ == "__main__":

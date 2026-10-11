@@ -5,6 +5,7 @@ Each row prints left-to-right with a cursor, staggered top-to-bottom.
 """
 import os
 import sys
+from html import escape
 from pathlib import Path
 
 import cv2
@@ -12,34 +13,37 @@ import numpy as np
 from PIL import Image
 
 
-# Density ramp: bright (sparse) -> dark (dense)
+# Density ramp: dark (dense) -> bright (sparse)
 # Leading space clears background to nothing
 RAMP = " .`:-=+*cs#%@"
 
 # Output dimensions (chars wide × rows tall)
 TARGET_WIDTH = 100
-TARGET_HEIGHT = 53
 
 # Animation timing
 ROW_DELAY_MS = 80       # stagger between rows
 CHAR_DURATION_MS = 15   # time per character in a row
 CURSOR_WIDTH = 2        # cursor block width in chars
+FONT_SIZE = 10
+LINE_HEIGHT = 14
+CHAR_WIDTH = 7.5
 
 # Colors
 FILL_COLOR = "#8b949e"   # GitHub light gray
 BG_COLOR = "#0d1117"     # GitHub dark background
 
 
-def image_to_ascii(image_path: str, width: int = TARGET_WIDTH, height: int = TARGET_HEIGHT) -> list[str]:
+def image_to_ascii(image_path: str, width: int = TARGET_WIDTH) -> list[str]:
     """Convert image to ASCII art lines."""
     img = Image.open(image_path).convert("L")  # grayscale
+    height = max(1, round(img.height / img.width * width * CHAR_WIDTH / LINE_HEIGHT))
     img = img.resize((width, height), Image.Resampling.LANCZOS)
     arr = np.array(img)
 
     # Normalize to 0-1 and map to ramp
     normalized = arr / 255.0
     ramp_len = len(RAMP) - 1
-    indices = (normalized * ramp_len).astype(int)
+    indices = ((1.0 - normalized) * ramp_len).astype(int)
     indices = np.clip(indices, 0, ramp_len)
 
     lines = []
@@ -52,16 +56,12 @@ def image_to_ascii(image_path: str, width: int = TARGET_WIDTH, height: int = TAR
 def make_typing_svg(lines: list[str], output_path: str) -> None:
     """Generate SVG with row-by-row typing animation."""
     # Font metrics (monospace)
-    FONT_SIZE = 10
-    LINE_HEIGHT = 14
-    CHAR_WIDTH = 7.5  # approximate for monospace at 10px
-
     svg_width = int(TARGET_WIDTH * CHAR_WIDTH) + 20
     svg_height = int(len(lines) * LINE_HEIGHT) + 20
 
     # Build SVG
     svg_parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {svg_width} {svg_height}" ',
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {svg_width} {svg_height}"',
         f'     width="{svg_width}" height="{svg_height}">',
         f'  <rect width="100%" height="100%" fill="{BG_COLOR}"/>',
         f'  <style>',
@@ -119,7 +119,7 @@ def make_typing_svg(lines: list[str], output_path: str) -> None:
     if os.environ.get("STATIC") == "1":
         # Rebuild without animations - just final state
         svg_parts = [
-            f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {svg_width} {svg_height}" ',
+            f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {svg_width} {svg_height}"',
             f'     width="{svg_width}" height="{svg_height}">',
             f'  <rect width="100%" height="100%" fill="{BG_COLOR}"/>',
             f'  <style>',
@@ -134,17 +134,17 @@ def make_typing_svg(lines: list[str], output_path: str) -> None:
 
     svg_parts.append('</svg>')
 
-    Path(output_path).write_text("\n".join(svg_parts))
+    Path(output_path).write_text("\n".join(svg_parts), encoding="utf-8")
     print(f"Wrote {output_path} ({len(lines)} rows)")
 
 
 def escape_xml(text: str) -> str:
-    return text.replace("&", "&").replace("<", "<").replace(">", ">")
+    return escape(text)
 
 
 def main():
     input_path = Path("data/source-prepped.png")
-    output_path = Path("avi-ascii.svg")
+    output_path = Path("mohammed-ascii.svg")
 
     if not input_path.exists():
         print(f"Error: {input_path} not found. Run prep_photo.py first.")

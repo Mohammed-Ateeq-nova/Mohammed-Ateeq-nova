@@ -6,12 +6,15 @@ Prepare a photo for ASCII conversion:
 3. Composite onto pure white
 """
 import sys
+import io
 from pathlib import Path
 
 import cv2
 import numpy as np
 from PIL import Image
 from rembg import remove
+
+DEFAULT_INPUT = "professional-photo.png"
 
 
 def prep_photo(input_path: str, output_path: str = "data/source-prepped.png"):
@@ -57,11 +60,6 @@ def prep_photo(input_path: str, output_path: str = "data/source-prepped.png"):
 
 
 if __name__ == "__main__":
-    import io
-    if len(sys.argv) < 2:
-        print("Usage: python prep_photo.py <input_image> [output_path]")
-        sys.exit(1)
-
-    input_path = sys.argv[1]
+    input_path = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_INPUT
     output_path = sys.argv[2] if len(sys.argv) > 2 else "data/source-prepped.png"
     prep_photo(input_path, output_path)
