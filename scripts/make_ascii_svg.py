@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Convert prepped grayscale image to a self-typing ASCII SVG.
-Each row prints left-to-right with a cursor, staggered top-to-bottom.
+Install the supplied vectorized ASCII portrait as the README artwork.
 """
 import os
+import shutil
 import sys
 from html import escape
 from pathlib import Path
@@ -143,18 +143,15 @@ def escape_xml(text: str) -> str:
 
 
 def main():
-    input_path = Path("data/source-prepped.png")
+    input_path = Path("asciinator_11Oct_001.svg")
     output_path = Path("mohammed-ascii.svg")
 
     if not input_path.exists():
-        print(f"Error: {input_path} not found. Run prep_photo.py first.")
+        print(f"Error: {input_path} not found.")
         sys.exit(1)
 
-    print("Converting image to ASCII...")
-    lines = image_to_ascii(str(input_path))
-
-    print("Generating typing SVG...")
-    make_typing_svg(lines, str(output_path))
+    shutil.copyfile(input_path, output_path)
+    print(f"Copied {input_path} to {output_path}")
 
 
 if __name__ == "__main__":
