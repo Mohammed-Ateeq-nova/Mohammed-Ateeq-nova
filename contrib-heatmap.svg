@@ -314,7 +314,7 @@
   <rect x="680" y="110" width="13" height="13" rx="2" fill="#161b22" opacity="0" transform="translate(-10, -10)">    <animate attributeName="opacity" from="0" to="1" begin="750ms" dur="500ms" fill="freeze"/>    <animate attributeName="transform" from="translate(-10, -10)" to="translate(0, 0)" begin="750ms" dur="500ms" fill="freeze" calcMode="spline" keySplines="0.25 0.1 0.25 1"/>  </rect>
   <rect x="680" y="126" width="13" height="13" rx="2" fill="#161b22" opacity="0" transform="translate(-10, -10)">    <animate attributeName="opacity" from="0" to="1" begin="780ms" dur="500ms" fill="freeze"/>    <animate attributeName="transform" from="translate(-10, -10)" to="translate(0, 0)" begin="780ms" dur="500ms" fill="freeze" calcMode="spline" keySplines="0.25 0.1 0.25 1"/>  </rect>
   <rect x="696" y="30" width="13" height="13" rx="2" fill="#006d32" opacity="0" transform="translate(-10, -10)">    <animate attributeName="opacity" from="0" to="1" begin="615ms" dur="500ms" fill="freeze"/>    <animate attributeName="transform" from="translate(-10, -10)" to="translate(0, 0)" begin="615ms" dur="500ms" fill="freeze" calcMode="spline" keySplines="0.25 0.1 0.25 1"/>  </rect>
-  <rect x="696" y="46" width="13" height="13" rx="2" fill="#161b22" opacity="0" transform="translate(-10, -10)">    <animate attributeName="opacity" from="0" to="1" begin="645ms" dur="500ms" fill="freeze"/>    <animate attributeName="transform" from="translate(-10, -10)" to="translate(0, 0)" begin="645ms" dur="500ms" fill="freeze" calcMode="spline" keySplines="0.25 0.1 0.25 1"/>  </rect>
+  <rect x="696" y="46" width="13" height="13" rx="2" fill="#0e4429" opacity="0" transform="translate(-10, -10)">    <animate attributeName="opacity" from="0" to="1" begin="645ms" dur="500ms" fill="freeze"/>    <animate attributeName="transform" from="translate(-10, -10)" to="translate(0, 0)" begin="645ms" dur="500ms" fill="freeze" calcMode="spline" keySplines="0.25 0.1 0.25 1"/>  </rect>
   <rect x="696" y="62" width="13" height="13" rx="2" fill="#0e4429" opacity="0" transform="translate(-10, -10)">    <animate attributeName="opacity" from="0" to="1" begin="675ms" dur="500ms" fill="freeze"/>    <animate attributeName="transform" from="translate(-10, -10)" to="translate(0, 0)" begin="675ms" dur="500ms" fill="freeze" calcMode="spline" keySplines="0.25 0.1 0.25 1"/>  </rect>
   <rect x="696" y="78" width="13" height="13" rx="2" fill="#0e4429" opacity="0" transform="translate(-10, -10)">    <animate attributeName="opacity" from="0" to="1" begin="705ms" dur="500ms" fill="freeze"/>    <animate attributeName="transform" from="translate(-10, -10)" to="translate(0, 0)" begin="705ms" dur="500ms" fill="freeze" calcMode="spline" keySplines="0.25 0.1 0.25 1"/>  </rect>
   <rect x="696" y="94" width="13" height="13" rx="2" fill="#161b22" opacity="0" transform="translate(-10, -10)">    <animate attributeName="opacity" from="0" to="1" begin="735ms" dur="500ms" fill="freeze"/>    <animate attributeName="transform" from="translate(-10, -10)" to="translate(0, 0)" begin="735ms" dur="500ms" fill="freeze" calcMode="spline" keySplines="0.25 0.1 0.25 1"/>  </rect>
@@ -406,7 +406,7 @@
   <rect x="165" y="149" width="13" height="13" rx="2" fill="#69f0a0"/>
   <text x="190" y="158" class="label">More</text>
   <text x="40" y="190" class="stat">
-    115 contributions in the last year
+    116 contributions in the last year
   </text>
   <text x="40" y="210" class="stat-label">Current streak: </text>
   <text x="150" y="210" class="stat">0 days</text>
